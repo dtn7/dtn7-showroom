@@ -20,6 +20,27 @@ RUN git clone https://github.com/gh0st42/dtnchat && cd dtnchat && \
     git checkout 93f1450 && \
     cargo install --bins --examples --root /usr/local --path .
 
+
+FROM ${ARCH}golang:1.19 as gobuilder
+
+ARG wtfversion=v0.41.0
+
+RUN git clone https://github.com/wtfutil/wtf.git $GOPATH/src/github.com/wtfutil/wtf && \
+    cd $GOPATH/src/github.com/wtfutil/wtf && \
+    git checkout $wtfversion
+
+ENV GOPROXY=https://proxy.golang.org,direct
+ENV GO111MODULE=on
+ENV GOSUMDB=off
+
+WORKDIR $GOPATH/src/github.com/wtfutil/wtf
+
+ENV PATH=$PATH:./bin
+
+RUN make build && \
+    cp bin/wtfutil /usr/local/bin/
+
+
 FROM ${ARCH}gh0st42/coreemu-lab:1.0.0
 
 # install stuff for vnc session
@@ -46,18 +67,22 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash && \
 COPY configs/dtnmap.json /root/nodered/
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
+COPY --from=gobuilder /usr/local/bin/* /usr/local/bin/
+
 RUN touch /root/.Xresources
 RUN touch /root/.Xauthority
 WORKDIR /root
 RUN mkdir .vnc Desktop
 COPY configs/Xdefaults /root/.Xdefaults
 COPY scripts/fakegps.sh /usr/local/bin/fakegps.sh
+COPY scripts/dtn7-* /usr/local/bin/
 
 RUN mkdir -p /root/.core/myservices && mkdir -p /root/.coregui/custom_services && mkdir -p /root/.coregui/icons
 COPY core_services/* /root/.core/myservices/
 COPY coregui/config.yaml /root/.coregui/
 COPY coregui/icons/* /root/.coregui/icons/
 COPY scenarios/*.xml /root/.coregui/xmls/
+COPY configs/dtn7.yml /root/
 
 
 

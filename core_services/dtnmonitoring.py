@@ -85,8 +85,7 @@ class DtnMonitoringService(CoreService):
         cfg = f"""#!/bin/bash
 export DISPLAY=:1.0 
 sleep 1 
-xterm -rv -title 'Bundles @ Nodes' -e watch "cea 'dtnquery bundles | grep -e dtn: -e ipn: | wc -l'" &
-xterm -rv -title 'Peers @ Nodes' -e watch "cea 'dtnquery peers | grep addr | wc -l'" &
+xterm -rv -title 'DTN Overview' -e wtfutil -c=/root/dtn7.yml &
         """
         return cfg
 
