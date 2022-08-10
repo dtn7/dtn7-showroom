@@ -15,6 +15,7 @@
         <service name="dtnecho"/>
         <service name="DefaultMulticastRoute"/>
         <service name="dtnmonitoring"/>
+        <service name="fakegpslogger"/>
       </services>
     </device>
     <device id="2" name="mobile1" icon="" canvas="0" type="DTN" class="" image="">
