@@ -37,11 +37,13 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash && \
     npm i -g node-red-dashboard && \
     npm i -g node-red-node-ui-list && \
     npm i -g node-red-contrib-web-worldmap && \
+    npm i -g node-red-contrib-proj4 && \
     mkdir -p /root/nodered/ && \
     cd /root/nodered/ && \
-    wget https://raw.githubusercontent.com/dtn7/dtn7-plus-rs/master/extra/dtnmap.json && \
+    #    wget https://raw.githubusercontent.com/dtn7/dtn7-plus-rs/master/extra/dtnmap.json && \
     rm -rf /var/lib/apt/lists/*
 
+COPY configs/dtnmap.json /root/nodered/
 COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
 RUN touch /root/.Xresources

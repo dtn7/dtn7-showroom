@@ -1,3 +1,5 @@
+[![Chat](https://img.shields.io/matrix/dtn7:matrix.org)](https://matrix.to/#/#dtn7:matrix.org)
+
 # dtn7 showroom
 
 This Docker image contains a virtual showroom and playground for various applications using [dtn7-rs](https://github.com/dtn7/dtn7-rs).
