@@ -42,7 +42,7 @@ class FakeGPSLoggerService(CoreService):
     dirs: Tuple[str, ...] = ()
     configs: Tuple[str, ...] = ()
     startup: Tuple[str, ...] = (
-        "bash -c 'sleep 2 && dtngpslogger -f /tmp/$(hostname).xy -i 5s -r dtn://global/~pos'", )
+        "bash -c 'sleep 2 && dtngpslogger -f /tmp/$(hostname).xy -i 5s -m -x -r dtn://global/~pos'", )
     validate: Tuple[str, ...] = ()
     validation_mode: ServiceMode = ServiceMode.NON_BLOCKING
     validation_timer: int = 5

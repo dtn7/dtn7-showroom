@@ -7,7 +7,7 @@ RUN git clone https://github.com/dtn7/dtn7-rs  && cd dtn7-rs && \
     git checkout 0bb1fa3 && \
     cargo install --locked --bins --examples --root /usr/local --path examples && \
     cargo install --locked --bins --examples --root /usr/local --path core/dtn7
-RUN cargo install --locked --bins --examples --root /usr/local dtn7-plus --git https://github.com/dtn7/dtn7-plus-rs  --rev 9d0ee14 dtn7-plus
+RUN cargo install --locked --bins --examples --root /usr/local dtn7-plus --git https://github.com/dtn7/dtn7-plus-rs  --rev 010202e56 dtn7-plus
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y libpango1.0-dev libatk1.0-dev libsoup2.4-dev libwebkit2gtk-4.0-dev cmake && \
     rm -rf /var/lib/apt/lists/*
