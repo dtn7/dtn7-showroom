@@ -1,5 +1,19 @@
 #!/bin/sh
-clear
+
+SHARED="/tmp/shared"
+if [ -n "$1" ]; then
+    SHARED=$(readlink -f $1)
+    echo Using custom shared directory: $SHARED
+else
+    echo Using default shared directory: $SHARED
+fi
+
+if [ -n "$2" ]; then
+    INTERACTIVE="--entrypoint /bin/bash"
+else
+    INTERACTIVE=""
+fi
+
 echo
 echo "'########::'########:'##::: ##:'########::'######::'##::::'##::'#######::'##:::::'##:'########:::'#######:::'#######::'##::::'##:"
 echo " ##.... ##:... ##..:: ###:: ##: ##..  ##:'##... ##: ##:::: ##:'##.... ##: ##:'##: ##: ##.... ##:'##.... ##:'##.... ##: ###::'###:"
@@ -13,4 +27,13 @@ echo
 echo "==> vnc://127.0.0.1:5901"
 echo "==> password: sneakers"
 echo 
-docker run --rm -it --name showroom -p 5901:5901 -p 50052:50051 -p 2023:22 --privileged -v /tmp/shared:/shared gh0st42/dtn7-showroom
+docker run --rm -it                                 \
+    --name showroom                                 \
+    -p 5901:5901                                    \
+    -p 50052:50051                                  \
+    -p 2023:22                                      \
+    -p 1190:1190                                    \
+    -v $SHARED:/shared                              \
+    --privileged                                    \
+    $INTERACTIVE                                    \
+    dtn7-showroom

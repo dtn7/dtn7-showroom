@@ -23,7 +23,8 @@ if test -f "/tmp/.X1-lock"; then
 fi
 
 #/usr/bin/tightvncserver -geometry 1280x800 -depth 24 &
-/usr/bin/tightvncserver -geometry 1920x1080 -depth 24 &
+# /usr/bin/tightvncserver -geometry 1920x1080 -depth 24 &
+/usr/bin/tightvncserver -geometry 2560x1080 -depth 24 &
 
 /usr/local/bin/fakegps.sh > /tmp/fakegps.log 2>&1 &
 
