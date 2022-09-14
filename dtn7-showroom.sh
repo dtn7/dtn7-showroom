@@ -1,19 +1,5 @@
 #!/bin/sh
-
-SHARED="/tmp/shared"
-if [ -n "$1" ]; then
-    SHARED=$(readlink -f $1)
-    echo Using custom shared directory: $SHARED
-else
-    echo Using default shared directory: $SHARED
-fi
-
-if [ -n "$2" ]; then
-    INTERACTIVE="--entrypoint /bin/bash"
-else
-    INTERACTIVE=""
-fi
-
+clear
 echo
 echo "'########::'########:'##::: ##:'########::'######::'##::::'##::'#######::'##:::::'##:'########:::'#######:::'#######::'##::::'##:"
 echo " ##.... ##:... ##..:: ###:: ##: ##..  ##:'##... ##: ##:::: ##:'##.... ##: ##:'##: ##: ##.... ##:'##.... ##:'##.... ##: ###::'###:"
