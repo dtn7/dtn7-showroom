@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<posting>
+  <profiles>
+    <profile name="Default">
+      <username></username>
+      <address>QQQQQ@monntpy.net</address>
+      <server>1</server>
+      <xface></xface>
+      <attribution>On %d, %n wrote:</attribution>
+    </profile>
+  </profiles>
+
+</posting>

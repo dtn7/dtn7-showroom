@@ -50,7 +50,7 @@ RUN apt-get update && \
     apt-get install -y lxde-core lxterminal \
     tightvncserver firefox wmctrl xterm \
     gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl \
-    pan tin \
+    pan tin slrn thunderbird \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash && \
@@ -90,12 +90,13 @@ COPY configs/dtn7.yml /root/
 
 RUN pip install poetry==1.1.13 && \
     mkdir -p /app/moNNT.py && \
-    git clone https://github.com/teschmitt/moNNT.py.git .
+    mkdir -p /root/.pan2 && \
+    git clone https://github.com/teschmitt/moNNT.py.git /app/moNNT.py
 WORKDIR /app/moNNT.py
 RUN poetry install --no-interaction --no-ansi --no-root --no-dev
 
-COPY ./configs/monntpy-config.py /app/moNNT.py/backend/dtn7sqlite/config.py
-
+COPY configs/monntpy-config.py /app/moNNT.py/backend/dtn7sqlite/config.py
+COPY configs/.pan2 /root/.pan2
 # -----------------------------------------------------------------------------
 
 # add new user for tunneling into gateway node in DTN-NNTP scenario
