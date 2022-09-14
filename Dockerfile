@@ -49,7 +49,8 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
     apt-get install -y lxde-core lxterminal \
     tightvncserver firefox wmctrl xterm \
-    gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl \    
+    gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl \
+    pan tin slrn thunderbird \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash && \
@@ -85,6 +86,24 @@ COPY scenarios/*.xml /root/.coregui/xmls/
 COPY configs/dtn7.yml /root/
 
 
+# --------------------------- moNNT.py Installation ---------------------------
+
+RUN pip install poetry==1.1.13 && \
+    mkdir -p /app/moNNT.py && \
+    mkdir -p /root/.pan2 && \
+    git clone https://github.com/teschmitt/moNNT.py.git /app/moNNT.py
+WORKDIR /app/moNNT.py
+RUN poetry install --no-interaction --no-ansi --no-root --no-dev
+
+COPY configs/monntpy-config.py /app/moNNT.py/backend/dtn7sqlite/config.py
+COPY configs/.pan2 /root/.pan2
+# -----------------------------------------------------------------------------
+
+# add new user for tunneling into gateway node in DTN-NNTP scenario
+# RUN useradd --create-home --no-log-init --shell /bin/bash joe
+# USER joe
+# RUN ssh-keygen -t rsa -f "$HOME/.ssh/id_rsa" -N ""
+# USER root
 
 # COPY xstartup with start for lxde
 COPY configs/xstartup /root/.vnc/
@@ -96,6 +115,8 @@ ENV USER root
 RUN printf "sneakers\nsneakers\nn\n" | vncpasswd
 
 EXPOSE 22
+EXPOSE 1190
 EXPOSE 5901
 EXPOSE 50051
 ENTRYPOINT [ "/entrypoint.sh" ]
+WORKDIR /root
