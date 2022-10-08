@@ -91,12 +91,17 @@ COPY configs/dtn7.yml /root/
 RUN pip install poetry==1.1.13 && \
     mkdir -p /app/moNNT.py && \
     mkdir -p /root/.pan2 && \
-    git clone https://github.com/teschmitt/moNNT.py.git /app/moNNT.py
+    mkdir -p /root/.thunderbird && \
+    git clone https://github.com/teschmitt/moNNT.py.git /app/moNNT.py && \
+    cd /app/moNNT.py && git checkout 049fbac
 WORKDIR /app/moNNT.py
+
 RUN poetry install --no-interaction --no-ansi --no-root --no-dev
 
 COPY configs/monntpy-config.py /app/moNNT.py/backend/dtn7sqlite/config.py
 COPY configs/.pan2 /root/.pan2
+COPY configs/.thunderbird /root/.thunderbird
+COPY configs/db.sqlite3 /app/moNNT.py/
 # -----------------------------------------------------------------------------
 
 # add new user for tunneling into gateway node in DTN-NNTP scenario

@@ -2,12 +2,12 @@
 <posting>
   <profiles>
     <profile name="Default">
-      <username></username>
-      <address>QQQQQ@monntpy.net</address>
+      <username>M. Smith</username>
+      <address>msmith@monntpy.org</address>
       <server>1</server>
+      <face></face>
       <xface></xface>
-      <attribution>On %d, %n wrote:</attribution>
+      <attribution>Am %d schrieb %n:</attribution>
     </profile>
   </profiles>
-
 </posting>

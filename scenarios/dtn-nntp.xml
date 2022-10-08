@@ -1,39 +1,48 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<scenario name="/tmp/tmphsbqz3r8">
+<scenario name="/tmp/tmpsbwmtcfp">
   <networks>
     <network id="3" name="wlan3" icon="" canvas="0" type="WIRELESS_LAN">
-      <position x="245.0" y="443.0" lat="47.57648186404758" lon="-122.13012334630389" alt="2.0"/>
+      <position x="463.0" y="177.0" lat="47.57809382152767" lon="-122.1281650189845" alt="2.0"/>
     </network>
   </networks>
   <devices>
     <device id="2" name="n2" icon="" canvas="0" type="DTN" class="" image="">
-      <position x="532.0" y="336.0" lat="47.57713028900011" lon="-122.12754518143845" alt="2.0"/>
+      <position x="710.0" y="330.0" lat="47.57716664904006" lon="-122.12594618023273" alt="2.0"/>
       <services>
-        <service name="dtnd"/>
-        <service name="dtnecho"/>
         <service name="DefaultMulticastRoute"/>
         <service name="MonntpyService"/>
+        <service name="UserDefined"/>
+        <service name="dtnd"/>
+        <service name="dtnecho"/>
       </services>
     </device>
     <device id="4" name="gateway" icon="" canvas="0" type="DTN" class="" image="">
-      <position x="532.0" y="540.0" lat="47.57589403261857" lon="-122.12754518143845" alt="2.0"/>
+      <position x="309.0" y="499.0" lat="47.576142498254555" lon="-122.12954842452204" alt="2.0"/>
       <services>
         <service name="DefaultMulticastRoute"/>
+        <service name="dtnmonitoring"/>
+        <service name="MonntpyMonitorService"/>
+        <service name="DefaultRoute"/>
         <service name="MonntpyService"/>
         <service name="dtnd"/>
-        <service name="UserDefined"/>
-        <service name="dtnmonitoring"/>
-        <service name="DefaultRoute"/>
-        <service name="MonntpyMonitorService"/>
       </services>
     </device>
     <device id="1" name="n1" icon="" canvas="0" type="DTN" class="" image="">
-      <position x="352.0" y="206.0" lat="47.57791808421264" lon="-122.12916214894989" alt="2.0"/>
+      <position x="184.0" y="322.0" lat="47.57721512905405" lon="-122.1306713186272" alt="2.0"/>
       <services>
         <service name="dtnd"/>
-        <service name="dtnecho"/>
         <service name="DefaultMulticastRoute"/>
         <service name="MonntpyService"/>
+        <service name="UserDefined"/>
+        <service name="dtnecho"/>
+      </services>
+    </device>
+    <device id="5" name="relay1" icon="" canvas="0" type="DTN" class="" image="">
+      <position x="482.0" y="335.0" lat="47.57713634900852" lon="-122.12799433908053" alt="2.0"/>
+      <services>
+        <service name="DefaultMulticastRoute"/>
+        <service name="dtnd"/>
+        <service name="dtnecho"/>
       </services>
     </device>
   </devices>
@@ -41,11 +50,14 @@
     <link node1="3" node2="1">
       <iface2 id="0" name="eth0" mac="00:00:00:aa:00:00" ip4="10.0.0.20" ip4_mask="24" ip6="2001::14" ip6_mask="128"/>
     </link>
-    <link node1="3" node2="4">
-      <iface2 id="0" name="eth0" mac="00:00:00:aa:00:02" ip4="10.0.0.22" ip4_mask="24" ip6="2001::16" ip6_mask="128"/>
+    <link node1="3" node2="5">
+      <iface2 id="0" name="eth0" mac="00:00:00:aa:00:03" ip4="10.0.0.50" ip4_mask="24" ip6="2001::17" ip6_mask="128"/>
     </link>
     <link node1="3" node2="2">
       <iface2 id="0" name="eth0" mac="00:00:00:aa:00:01" ip4="10.0.0.21" ip4_mask="24" ip6="2001::15" ip6_mask="128"/>
+    </link>
+    <link node1="3" node2="4">
+      <iface2 id="0" name="eth0" mac="00:00:00:aa:00:02" ip4="10.0.0.100" ip4_mask="24" ip6="2001::16" ip6_mask="128"/>
     </link>
   </links>
   <mobility_configurations>
@@ -70,6 +82,27 @@
     </core>
   </emane_global_configuration>
   <service_configurations>
+    <service name="UserDefined" node="2">
+      <startups>
+        <startup>bash -c "sleep 2 &amp;&amp; export DISPLAY=:1.0 &amp;&amp; pan &amp;"</startup>
+      </startups>
+    </service>
+    <service name="MonntpyService" node="2">
+      <startups>
+        <startup>bash start-monntpy.sh</startup>
+      </startups>
+      <files>
+        <file name="start-monntpy.sh"><![CDATA[#!/bin/bash
+cur=$(pwd)
+cd /app/moNNT.py
+cp db.sqlite3 "$cur/"
+export SENDER_EMAIL=n2@monntpy.net
+poetry run ./main.py &> "$cur/monntpy.log"
+
+
+]]></file>
+      </files>
+    </service>
     <service name="SSH" node="4">
       <directories>
         <directory>/etc/ssh</directory>
@@ -106,6 +139,42 @@ cat /home/joe/.ssh/id_rsa.pub >> /etc/ssh/authorized_keys
 export DISPLAY=:1.0
 sleep 1
 xterm -rv -title 'moNNT.py Log Tail' -e tail -f "$SESSION_DIR/$(hostname).conf/monntpy.log"
+]]></file>
+      </files>
+    </service>
+    <service name="MonntpyService" node="4">
+      <startups>
+        <startup>bash start-monntpy.sh</startup>
+      </startups>
+      <files>
+        <file name="start-monntpy.sh"><![CDATA[#!/bin/bash
+cur=$(pwd)
+cd /app/moNNT.py
+cp db.sqlite3 "$cur/"
+export SENDER_EMAIL=gateway@monntpy.net
+poetry run ./main.py &> "$cur/monntpy.log"
+
+]]></file>
+      </files>
+    </service>
+    <service name="UserDefined" node="1">
+      <startups>
+        <startup>bash -c "sleep 2 &amp;&amp; thunderbird --display=:1.0"</startup>
+      </startups>
+    </service>
+    <service name="MonntpyService" node="1">
+      <startups>
+        <startup>bash start-monntpy.sh</startup>
+      </startups>
+      <files>
+        <file name="start-monntpy.sh"><![CDATA[#!/bin/bash
+cur=$(pwd)
+cd /app/moNNT.py
+cp db.sqlite3 "$cur/"
+export SENDER_EMAIL=n1@monntpy.net
+poetry run ./main.py &> "$cur/monntpy.log"
+
+
 ]]></file>
       </files>
     </service>
