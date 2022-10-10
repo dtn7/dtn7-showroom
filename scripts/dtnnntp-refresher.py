@@ -33,11 +33,12 @@ con = sqlite3.connect(
 
 with con:
     dts = con.execute("SELECT created_at, id FROM article").fetchall()
-    print(f"  -> Found {len(dts)} article entries")
+    num_art = len(dts)
+    print(f"  -> Found {num_art} article entries")
     now = datetime.datetime.utcnow()
 
-    for d in range(len(dts),0,-1):
-        dts[len(dts) - d] = (now - datetime.timedelta(seconds=d), dts[len(dts) - d][1], )
+    for d in range(num_art):
+        dts[d] = (now - datetime.timedelta(seconds=(num_art - d)), dts[d][1], )
 
     print("  -> Updating created_at datetimes")
     con.executemany("UPDATE article SET created_at=? WHERE id=?", dts)

@@ -100,13 +100,11 @@ WORKDIR /app/moNNT.py
 
 RUN poetry install --no-interaction --no-ansi --no-root --no-dev
 
-# copy pre-loaded db and refresh article datetime fields
 COPY scripts/dtnnntp-refresher.py /app
-RUN /app/dtnnntp-refresher.py
-
 ENV DB_PATH="/app/moNNT.py/db.sqlite3" \
     NNTPPORT=1190 \
     NNTPSERVER=localhost
+RUN /app/dtnnntp-refresher.py
 
 # -----------------------------------------------------------------------------
 
