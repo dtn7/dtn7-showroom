@@ -55,10 +55,10 @@ user_pref("mail.identity.id1.draft_folder", "mailbox://nobody@Local%20Folders/Dr
 user_pref("mail.identity.id1.drafts_folder_picker_mode", "0");
 user_pref("mail.identity.id1.fcc_folder", "mailbox://nobody@Local%20Folders/Sent");
 user_pref("mail.identity.id1.fcc_folder_picker_mode", "0");
-user_pref("mail.identity.id1.fullName", "J. Doe");
+user_pref("mail.identity.id1.fullName", "A. Doe");
 user_pref("mail.identity.id1.stationery_folder", "mailbox://nobody@Local%20Folders/Templates");
 user_pref("mail.identity.id1.tmpl_folder_picker_mode", "0");
-user_pref("mail.identity.id1.useremail", "j.doe@monntpy.org");
+user_pref("mail.identity.id1.useremail", "a.doe@monntpy.org");
 user_pref("mail.identity.id1.valid", true);
 user_pref("mail.openMessageBehavior.version", 1);
 user_pref("mail.purge_threshhold_mb", 20);

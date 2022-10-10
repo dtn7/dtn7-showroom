@@ -2,8 +2,8 @@
 <posting>
   <profiles>
     <profile name="Default">
-      <username>M. Smith</username>
-      <address>msmith@monntpy.org</address>
+      <username>B. Smith</username>
+      <address>bob@monntpy.org</address>
       <server>1</server>
       <face></face>
       <xface></xface>

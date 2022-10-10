@@ -1,48 +1,48 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<scenario name="/tmp/tmpsbwmtcfp">
+<scenario name="/tmp/tmpyezijwai">
   <networks>
     <network id="3" name="wlan3" icon="" canvas="0" type="WIRELESS_LAN">
-      <position x="463.0" y="177.0" lat="47.57809382152767" lon="-122.1281650189845" alt="2.0"/>
+      <position x="406.0" y="160.0" lat="47.57819683967949" lon="-122.12867705869644" alt="2.0"/>
     </network>
   </networks>
   <devices>
-    <device id="2" name="n2" icon="" canvas="0" type="DTN" class="" image="">
-      <position x="710.0" y="330.0" lat="47.57716664904006" lon="-122.12594618023273" alt="2.0"/>
+    <device id="2" name="bob" icon="" canvas="0" type="DTN" class="" image="">
+      <position x="548.0" y="590.0" lat="47.575591024149794" lon="-122.127401450993" alt="2.0"/>
       <services>
-        <service name="DefaultMulticastRoute"/>
         <service name="MonntpyService"/>
         <service name="UserDefined"/>
         <service name="dtnd"/>
+        <service name="DefaultMulticastRoute"/>
         <service name="dtnecho"/>
       </services>
     </device>
     <device id="4" name="gateway" icon="" canvas="0" type="DTN" class="" image="">
-      <position x="309.0" y="499.0" lat="47.576142498254555" lon="-122.12954842452204" alt="2.0"/>
+      <position x="404.0" y="314.0" lat="47.57726360902315" lon="-122.12869502500213" alt="2.0"/>
       <services>
-        <service name="DefaultMulticastRoute"/>
-        <service name="dtnmonitoring"/>
-        <service name="MonntpyMonitorService"/>
-        <service name="DefaultRoute"/>
         <service name="MonntpyService"/>
+        <service name="DefaultRoute"/>
+        <service name="DefaultMulticastRoute"/>
+        <service name="MonntpyMonitorService"/>
+        <service name="dtnmonitoring"/>
         <service name="dtnd"/>
       </services>
     </device>
-    <device id="1" name="n1" icon="" canvas="0" type="DTN" class="" image="">
-      <position x="184.0" y="322.0" lat="47.57721512905405" lon="-122.1306713186272" alt="2.0"/>
+    <device id="1" name="anna" icon="" canvas="0" type="DTN" class="" image="">
+      <position x="239.0" y="593.0" lat="47.5755728435859" lon="-122.13017724522095" alt="2.0"/>
       <services>
-        <service name="dtnd"/>
-        <service name="DefaultMulticastRoute"/>
         <service name="MonntpyService"/>
         <service name="UserDefined"/>
+        <service name="dtnd"/>
+        <service name="DefaultMulticastRoute"/>
         <service name="dtnecho"/>
       </services>
     </device>
     <device id="5" name="relay1" icon="" canvas="0" type="DTN" class="" image="">
-      <position x="482.0" y="335.0" lat="47.57713634900852" lon="-122.12799433908053" alt="2.0"/>
+      <position x="401.0" y="454.0" lat="47.57641520308326" lon="-122.12872197446065" alt="2.0"/>
       <services>
         <service name="DefaultMulticastRoute"/>
-        <service name="dtnd"/>
         <service name="dtnecho"/>
+        <service name="dtnd"/>
       </services>
     </device>
   </devices>
@@ -96,8 +96,9 @@
 cur=$(pwd)
 cd /app/moNNT.py
 cp db.sqlite3 "$cur/"
-export SENDER_EMAIL=n2@monntpy.net
+export SENDER_EMAIL=bob@monntpy.net
 poetry run ./main.py &> "$cur/monntpy.log"
+
 
 
 ]]></file>
@@ -171,8 +172,9 @@ poetry run ./main.py &> "$cur/monntpy.log"
 cur=$(pwd)
 cd /app/moNNT.py
 cp db.sqlite3 "$cur/"
-export SENDER_EMAIL=n1@monntpy.net
+export SENDER_EMAIL=anna@monntpy.net
 poetry run ./main.py &> "$cur/monntpy.log"
+
 
 
 ]]></file>
