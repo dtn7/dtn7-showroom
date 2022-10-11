@@ -88,15 +88,24 @@ COPY configs/dtn7.yml /root/
 
 # --------------------------- moNNT.py Installation ---------------------------
 
+COPY configs/dtnnntp /root/
+
 RUN pip install poetry==1.1.13 && \
     mkdir -p /app/moNNT.py && \
-    mkdir -p /root/.pan2 && \
-    git clone https://github.com/teschmitt/moNNT.py.git /app/moNNT.py
+    git clone https://github.com/teschmitt/moNNT.py.git /app/moNNT.py && \
+    cd /app/moNNT.py && git checkout 049fbac && \
+    mv /root/monntpy-config.py /app/moNNT.py/backend/dtn7sqlite/config.py && \
+    mv /root/db.sqlite3 /app/moNNT.py
 WORKDIR /app/moNNT.py
+
 RUN poetry install --no-interaction --no-ansi --no-root --no-dev
 
-COPY configs/monntpy-config.py /app/moNNT.py/backend/dtn7sqlite/config.py
-COPY configs/.pan2 /root/.pan2
+COPY scripts/dtnnntp-refresher.py /app
+ENV DB_PATH="/app/moNNT.py/db.sqlite3" \
+    NNTPPORT=1190 \
+    NNTPSERVER=localhost
+RUN /app/dtnnntp-refresher.py
+
 # -----------------------------------------------------------------------------
 
 # add new user for tunneling into gateway node in DTN-NNTP scenario
