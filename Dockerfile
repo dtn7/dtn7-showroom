@@ -93,7 +93,7 @@ COPY configs/dtnnntp /root/
 RUN pip install poetry==1.1.13 && \
     mkdir -p /app/moNNT.py && \
     git clone https://github.com/teschmitt/moNNT.py.git /app/moNNT.py && \
-    cd /app/moNNT.py && git checkout 049fbac && \
+    cd /app/moNNT.py && git checkout 4ed3d9b && \
     mv /root/monntpy-config.py /app/moNNT.py/backend/dtn7sqlite/config.py && \
     mv /root/db.sqlite3 /app/moNNT.py
 WORKDIR /app/moNNT.py
@@ -103,8 +103,7 @@ RUN poetry install --no-interaction --no-ansi --no-root --no-dev
 COPY scripts/dtnnntp-refresher.py /app
 ENV DB_PATH="/app/moNNT.py/db.sqlite3" \
     NNTPPORT=1190 \
-    NNTPSERVER=localhost
-RUN /app/dtnnntp-refresher.py
+    NNTPSERVER=10.0.0.21
 
 # -----------------------------------------------------------------------------
 

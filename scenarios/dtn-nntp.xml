@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<scenario name="/tmp/tmpyezijwai">
+<scenario name="/tmp/tmpy_v4o__p">
   <networks>
-    <network id="3" name="wlan3" icon="" canvas="0" type="WIRELESS_LAN">
+    <network id="3" name="AdHocWiFi" icon="" canvas="0" type="WIRELESS_LAN">
       <position x="406.0" y="160.0" lat="47.57819683967949" lon="-122.12867705869644" alt="2.0"/>
     </network>
   </networks>
@@ -9,31 +9,31 @@
     <device id="2" name="bob" icon="" canvas="0" type="DTN" class="" image="">
       <position x="548.0" y="590.0" lat="47.575591024149794" lon="-122.127401450993" alt="2.0"/>
       <services>
-        <service name="MonntpyService"/>
         <service name="UserDefined"/>
-        <service name="dtnd"/>
         <service name="DefaultMulticastRoute"/>
+        <service name="dtnd"/>
+        <service name="MonntpyService"/>
         <service name="dtnecho"/>
       </services>
     </device>
     <device id="4" name="gateway" icon="" canvas="0" type="DTN" class="" image="">
       <position x="404.0" y="314.0" lat="47.57726360902315" lon="-122.12869502500213" alt="2.0"/>
       <services>
-        <service name="MonntpyService"/>
         <service name="DefaultRoute"/>
-        <service name="DefaultMulticastRoute"/>
-        <service name="MonntpyMonitorService"/>
         <service name="dtnmonitoring"/>
+        <service name="DefaultMulticastRoute"/>
         <service name="dtnd"/>
+        <service name="MonntpyService"/>
+        <service name="MonntpyMonitorService"/>
       </services>
     </device>
     <device id="1" name="anna" icon="" canvas="0" type="DTN" class="" image="">
       <position x="239.0" y="593.0" lat="47.5755728435859" lon="-122.13017724522095" alt="2.0"/>
       <services>
-        <service name="MonntpyService"/>
         <service name="UserDefined"/>
-        <service name="dtnd"/>
         <service name="DefaultMulticastRoute"/>
+        <service name="dtnd"/>
+        <service name="MonntpyService"/>
         <service name="dtnecho"/>
       </services>
     </device>
@@ -41,8 +41,8 @@
       <position x="401.0" y="454.0" lat="47.57641520308326" lon="-122.12872197446065" alt="2.0"/>
       <services>
         <service name="DefaultMulticastRoute"/>
-        <service name="dtnecho"/>
         <service name="dtnd"/>
+        <service name="dtnecho"/>
       </services>
     </device>
   </devices>
@@ -93,12 +93,17 @@
       </startups>
       <files>
         <file name="start-monntpy.sh"><![CDATA[#!/bin/bash
+
 cur=$(pwd)
 cd /app/moNNT.py
-cp db.sqlite3 "$cur/"
+cp -v db.sqlite3 "$cur/" >> "$cur/dtnnntp-refresher.log"
+
+# refresh timestamps to keep articles away from janitor cleanup
+export DB_PATH="$cur/db.sqlite3"
+/app/dtnnntp-refresher.py >> "$cur/dtnnntp-refresher.log"
+
 export SENDER_EMAIL=bob@monntpy.net
 poetry run ./main.py &> "$cur/monntpy.log"
-
 
 
 ]]></file>
@@ -126,8 +131,6 @@ touch /etc/ssh/authorized_keys
 chmod 600 /etc/ssh/authorized_keys
 cat /home/joe/.ssh/id_rsa.pub >> /etc/ssh/authorized_keys
 
-
-
 ]]></file>
       </files>
     </service>
@@ -149,9 +152,15 @@ xterm -rv -title 'moNNT.py Log Tail' -e tail -f "$SESSION_DIR/$(hostname).conf/m
       </startups>
       <files>
         <file name="start-monntpy.sh"><![CDATA[#!/bin/bash
+
 cur=$(pwd)
 cd /app/moNNT.py
-cp db.sqlite3 "$cur/"
+cp -v db.sqlite3 "$cur/" >> "$cur/dtnnntp-refresher.log"
+
+# refresh timestamps to keep articles away from janitor cleanup
+export DB_PATH="$cur/db.sqlite3"
+/app/dtnnntp-refresher.py >> "$cur/dtnnntp-refresher.log"
+
 export SENDER_EMAIL=gateway@monntpy.net
 poetry run ./main.py &> "$cur/monntpy.log"
 
@@ -169,12 +178,17 @@ poetry run ./main.py &> "$cur/monntpy.log"
       </startups>
       <files>
         <file name="start-monntpy.sh"><![CDATA[#!/bin/bash
+
 cur=$(pwd)
 cd /app/moNNT.py
-cp db.sqlite3 "$cur/"
+cp -v db.sqlite3 "$cur/" >> "$cur/dtnnntp-refresher.log"
+
+# refresh timestamps to keep articles away from janitor cleanup
+export DB_PATH="$cur/db.sqlite3"
+/app/dtnnntp-refresher.py >> "$cur/dtnnntp-refresher.log"
+
 export SENDER_EMAIL=anna@monntpy.net
 poetry run ./main.py &> "$cur/monntpy.log"
-
 
 
 ]]></file>
@@ -225,10 +239,10 @@ iptables-restore &lt; /root/ipv4tables</hook>
     <configuration name="ovs" value="0"/>
   </session_options>
   <session_metadata>
-    <configuration name="shapes" value="[{&quot;canvas&quot;: 1, &quot;type&quot;: &quot;text&quot;, &quot;iconcoords&quot;: [402.99999999999994, 67.0], &quot;label&quot;: &quot;DTN Newsgroup Communication&quot;, &quot;fontfamily&quot;: &quot;Arial&quot;, &quot;fontsize&quot;: 28, &quot;labelcolor&quot;: &quot;#000000&quot;, &quot;color&quot;: &quot;&quot;, &quot;border&quot;: &quot;#000000&quot;, &quot;width&quot;: 1, &quot;bold&quot;: false, &quot;italic&quot;: false, &quot;underline&quot;: false}]"/>
-    <configuration name="hidden" value="[]"/>
     <configuration name="canvas" value="{&quot;gridlines&quot;: false, &quot;dimensions&quot;: [2000, 2000], &quot;canvases&quot;: [{&quot;id&quot;: 1, &quot;wallpaper&quot;: null, &quot;wallpaper_style&quot;: 1, &quot;fit_image&quot;: false}]}"/>
     <configuration name="edges" value="[]"/>
+    <configuration name="shapes" value="[{&quot;canvas&quot;: 1, &quot;type&quot;: &quot;text&quot;, &quot;iconcoords&quot;: [402.99999999999994, 67.0], &quot;label&quot;: &quot;DTN Newsgroup Communication&quot;, &quot;fontfamily&quot;: &quot;Arial&quot;, &quot;fontsize&quot;: 28, &quot;labelcolor&quot;: &quot;#000000&quot;, &quot;color&quot;: &quot;&quot;, &quot;border&quot;: &quot;#000000&quot;, &quot;width&quot;: 1, &quot;bold&quot;: false, &quot;italic&quot;: false, &quot;underline&quot;: false}]"/>
+    <configuration name="hidden" value="[]"/>
   </session_metadata>
   <default_services>
     <node type="mdr">
