@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <server-properties>
   <server id="1">
-    <host>localhost</host>
+    <host>10.0.0.21</host>
     <port>1190</port>
     <username></username>
     <password></password>

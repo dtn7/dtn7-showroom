@@ -79,7 +79,7 @@ user_pref("mail.server.server1.type", "none");
 user_pref("mail.server.server1.userName", "nobody");
 user_pref("mail.server.server2.directory", "/root/.thunderbird/zwtcehp3.default-release/News/127.0.0.1");
 user_pref("mail.server.server2.directory-rel", "[ProfD]News/127.0.0.1");
-user_pref("mail.server.server2.hostname", "localhost");
+user_pref("mail.server.server2.hostname", "10.0.0.20");
 user_pref("mail.server.server2.lastFilterTime", 27754465);
 user_pref("mail.server.server2.mail.newsrc_root", "/root/.thunderbird/zwtcehp3.default-release/News");
 user_pref("mail.server.server2.mail.newsrc_root-rel", "[ProfD]News");
@@ -89,7 +89,7 @@ user_pref("mail.server.server2.newsrc.file", "/root/.thunderbird/zwtcehp3.defaul
 user_pref("mail.server.server2.newsrc.file-rel", "[ProfD]News/newsrc-127.0.0.1");
 user_pref("mail.server.server2.nextFilterTime", 27754475);
 user_pref("mail.server.server2.port", 1190);
-user_pref("mail.server.server2.spamActionTargetAccount", "news://localhost");
+user_pref("mail.server.server2.spamActionTargetAccount", "news://10.0.0.20");
 user_pref("mail.server.server2.storeContractID", "@mozilla.org/msgstore/berkeleystore;1");
 user_pref("mail.server.server2.type", "nntp");
 user_pref("mail.show_headers", 2);
