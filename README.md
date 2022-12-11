@@ -9,6 +9,7 @@ Currently, the following example scenarios are included:
 
 - [dtn dwd](https//github.com/stg-tud/dtn-dwd): delay-tolerant weather warnings
 - [dtnchat](https://github.com/gh0st42/dtnchat): a simple text-based dtn chat including a chatbot
+- [NNTP DTN](https://github.com/teschmitt/moNNT.py): a NNTP-to-DTN gateway for group discussions using thunderbard, pan, etc.
 
 ## Running 
 
@@ -33,7 +34,7 @@ $ docker run --rm -it --name showroom -p 5901:5901 --privileged -v /tmp/shared:/
 
 You can then connect with any VNC client to the local *dtn7 showroom* instance with the password `sneakers`.
 
-In case of weird connection problems within the showroom, please make sure that *ebtables* and *sch_netem* kernel modules are loaded.
+*NOTE:* In case of weird connection problems within the showroom, please make sure that *ebtables* and *sch_netem* kernel modules are loaded!
 
 ## Manually building the container
 
