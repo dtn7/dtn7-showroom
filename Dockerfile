@@ -41,7 +41,7 @@ RUN make build && \
     cp bin/wtfutil /usr/local/bin/
 
 
-FROM ${ARCH}gh0st42/coreemu-lab:1.0.0
+FROM ${ARCH}gh0st42/coreemu-lab:1.1.0
 
 # install stuff for vnc session
 
