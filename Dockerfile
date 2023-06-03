@@ -109,13 +109,10 @@ ENV DB_PATH="/app/moNNT.py/db.sqlite3" \
 # --------------------------- dtn7zero Installation ---------------------------
 RUN sudo pip3 install --upgrade requests && pip3 install dtn7zero==0.0.6 && sudo apt install python3-matplotlib
 
-RUN cd /app && git clone --recurse-submodules https://github.com/dtn7/dtn7zero.git && \
-    cd dtn7zero && git checkout 256e46c1d8bf4fd300f3a2639bef90376247536a
-
 # pre-load and parse demo temperature data, will be stored in /app/data/temps.json
 RUN mkdir -p /root/.coregui/scripts
-COPY scripts/parse_weather_data.py /root/.coregui/scripts
-RUN python3 /root/.coregui/scripts/parse_weather_data.py
+COPY scripts/prepare_weather_data.py /root/.coregui/scripts
+RUN python3 /root/.coregui/scripts/prepare_weather_data.py
 
 
 # -----------------------------------------------------------------------------
