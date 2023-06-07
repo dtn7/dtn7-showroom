@@ -1,5 +1,7 @@
 ARG ARCH=
 
+# == build dtn7-rs, dtn-dwd, dtnchat
+
 FROM ${ARCH}rust:1.64 as builder
 WORKDIR /root
 RUN rustup component add rustfmt
@@ -20,6 +22,13 @@ RUN git clone https://github.com/gh0st42/dtnchat && cd dtnchat && \
     git checkout 93f1450 && \
     cargo install --bins --examples --root /usr/local --path .
 
+RUN apt-get update && apt-get -y install libudev-dev protobuf-compiler
+
+RUN git clone https://github.com/BigJk/dtn7-rs-lora-ecla.git && cd dtn7-rs-lora-ecla && \
+    git checkout 0277dbc8151300e260698cf32beab7bcb98d58f5 && \
+    cargo install --locked --bins --examples --root /usr/local --path .
+
+# == build wtf, loraemu
 
 FROM ${ARCH}golang:1.19 as gobuilder
 
@@ -40,6 +49,60 @@ ENV PATH=$PATH:./bin
 RUN make build && \
     cp bin/wtfutil /usr/local/bin/
 
+# == fetch node frontend building of loraemu
+
+RUN groupadd --gid 1000 node \
+  && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
+
+ENV NODE_VERSION 19.7.0
+
+RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
+  && case "${dpkgArch##*-}" in \
+    amd64) ARCH='x64';; \
+    ppc64el) ARCH='ppc64le';; \
+    s390x) ARCH='s390x';; \
+    arm64) ARCH='arm64';; \
+    armhf) ARCH='armv7l';; \
+    i386) ARCH='x86';; \
+    *) echo "unsupported architecture"; exit 1 ;; \
+  esac \
+  # gpg keys listed at https://github.com/nodejs/node#release-keys
+  && set -ex \
+  && for key in \
+    4ED778F539E3634C779C87C6D7062848A1AB005C \
+    141F07595B7B3FFE74309A937405533BE57C7D57 \
+    74F12602B6F1C4E913FAA37AD3A89613643B6201 \
+    61FC681DFB92A079F1685E77973F295594EC4689 \
+    8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600 \
+    C4F0DFFF4E8C1A8236409D08E73BC641CC11F4C8 \
+    890C08DB8579162FEE0DF9DB8BEAB4DFCF555EF4 \
+    C82FA3AE1CBEDC6BE46B9360C43CEC45C17AB93C \
+    108F52B48DB57BB0CC439B2997B01419BD92F80A \
+  ; do \
+      gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys "$key" || \
+      gpg --batch --keyserver keyserver.ubuntu.com --recv-keys "$key" ; \
+  done \
+  && curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.gz" \
+  && curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
+  && gpg --batch --decrypt --output SHASUMS256.txt SHASUMS256.txt.asc \
+  && grep " node-v$NODE_VERSION-linux-$ARCH.tar.gz\$" SHASUMS256.txt | sha256sum -c - \
+  && tar -xzf "node-v$NODE_VERSION-linux-$ARCH.tar.gz" -C /usr/local --strip-components=1 --no-same-owner \
+  && rm "node-v$NODE_VERSION-linux-$ARCH.tar.gz" SHASUMS256.txt.asc SHASUMS256.txt \
+  && ln -s /usr/local/bin/node /usr/local/bin/nodejs \
+  # smoke tests
+  && node --version \
+  && npm --version
+
+# == build loraemu + frontend and move files to /usr/local/bin
+
+RUN git clone https://github.com/bigjk/loraemu.git $GOPATH/src/github.com/bigjk/loraemu && \
+    cd $GOPATH/src/github.com/bigjk/loraemu && \
+    ./build_all.sh && \
+    mv ./release/emu ./release/loraemu && \
+    mv ./release/log-inspect ./release/loraemu-log-inspect && \
+    mv -v ./release/* /usr/local/bin/
+
+WORKDIR $GOPATH/src/github.com/bigjk/loraemu
 
 FROM ${ARCH}gh0st42/coreemu-lab:1.0.0
 
@@ -66,9 +129,12 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash && \
     rm -rf /var/lib/apt/lists/*
 
 COPY configs/dtnmap.json /root/nodered/
-COPY --from=builder /usr/local/bin/* /usr/local/bin/
 
+# copy executables from builders
+
+COPY --from=builder /usr/local/bin/* /usr/local/bin/
 COPY --from=gobuilder /usr/local/bin/* /usr/local/bin/
+COPY --from=gobuilder /usr/local/bin/frontend /usr/local/bin/frontend
 
 RUN touch /root/.Xresources
 RUN touch /root/.Xauthority
@@ -84,7 +150,7 @@ COPY coregui/config.yaml /root/.coregui/
 COPY coregui/icons/* /root/.coregui/icons/
 COPY scenarios/*.xml /root/.coregui/xmls/
 COPY configs/dtn7.yml /root/
-
+COPY loraemu/ /root/loraemu
 
 # --------------------------- moNNT.py Installation ---------------------------
 
@@ -126,5 +192,6 @@ EXPOSE 22
 EXPOSE 1190
 EXPOSE 5901
 EXPOSE 50051
+EXPOSE 8291
 ENTRYPOINT [ "/entrypoint.sh" ]
 WORKDIR /root

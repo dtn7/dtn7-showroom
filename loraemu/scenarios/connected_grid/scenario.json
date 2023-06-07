@@ -1,0 +1,66 @@
+{
+  "freq": 868,
+  "gamma": 2.2,
+  "refDistance": 40,
+  "kmRange": 10,
+  "packetConfig": {
+    "preambleLen": 32,
+    "spreadingFactor": 7,
+    "bandWidth": 250,
+    "codingRate": 8,
+    "crc": true,
+    "explicitHeader": false,
+    "lowDataRateOptimization": false
+  },
+  "nodes": [
+    {"id": "node0_0", "online": true, "rxSens": -139, "txGain": 20, "x": 1.0, "y": 1.0, "z": 1},
+    {"id": "node0_1", "online": true, "rxSens": -139, "txGain": 20, "x": 1.0, "y": 2.6, "z": 1},
+    {"id": "node0_2", "online": true, "rxSens": -139, "txGain": 20, "x": 1.0, "y": 4.2, "z": 1},
+    {"id": "node0_3", "online": true, "rxSens": -139, "txGain": 20, "x": 1.0, "y": 5.800000000000001, "z": 1},
+    {"id": "node0_4", "online": true, "rxSens": -139, "txGain": 20, "x": 1.0, "y": 7.4, "z": 1},
+    {"id": "node0_5", "online": true, "rxSens": -139, "txGain": 20, "x": 1.0, "y": 9.0, "z": 1},
+    {"id": "node1_0", "online": true, "rxSens": -139, "txGain": 20, "x": 2.6, "y": 1.0, "z": 1},
+    {"id": "node1_1", "online": true, "rxSens": -139, "txGain": 20, "x": 2.6, "y": 2.6, "z": 1},
+    {"id": "node1_2", "online": true, "rxSens": -139, "txGain": 20, "x": 2.6, "y": 4.2, "z": 1},
+    {"id": "node1_3", "online": true, "rxSens": -139, "txGain": 20, "x": 2.6, "y": 5.800000000000001, "z": 1},
+    {"id": "node1_4", "online": true, "rxSens": -139, "txGain": 20, "x": 2.6, "y": 7.4, "z": 1},
+    {"id": "node1_5", "online": true, "rxSens": -139, "txGain": 20, "x": 2.6, "y": 9.0, "z": 1},
+    {"id": "node2_0", "online": true, "rxSens": -139, "txGain": 20, "x": 4.2, "y": 1.0, "z": 1},
+    {"id": "node2_1", "online": true, "rxSens": -139, "txGain": 20, "x": 4.2, "y": 2.6, "z": 1},
+    {"id": "node2_2", "online": true, "rxSens": -139, "txGain": 20, "x": 4.2, "y": 4.2, "z": 1},
+    {"id": "node2_3", "online": true, "rxSens": -139, "txGain": 20, "x": 4.2, "y": 5.800000000000001, "z": 1},
+    {"id": "node2_4", "online": true, "rxSens": -139, "txGain": 20, "x": 4.2, "y": 7.4, "z": 1},
+    {"id": "node2_5", "online": true, "rxSens": -139, "txGain": 20, "x": 4.2, "y": 9.0, "z": 1},
+    {"id": "node3_0", "online": true, "rxSens": -139, "txGain": 20, "x": 5.800000000000001, "y": 1.0, "z": 1},
+    {"id": "node3_1", "online": true, "rxSens": -139, "txGain": 20, "x": 5.800000000000001, "y": 2.6, "z": 1},
+    {"id": "node3_2", "online": true, "rxSens": -139, "txGain": 20, "x": 5.800000000000001, "y": 4.2, "z": 1},
+    {"id": "node3_3", "online": true, "rxSens": -139, "txGain": 20, "x": 5.800000000000001, "y": 5.800000000000001, "z": 1},
+    {"id": "node3_4", "online": true, "rxSens": -139, "txGain": 20, "x": 5.800000000000001, "y": 7.4, "z": 1},
+    {"id": "node3_5", "online": true, "rxSens": -139, "txGain": 20, "x": 5.800000000000001, "y": 9.0, "z": 1},
+    {"id": "node4_0", "online": true, "rxSens": -139, "txGain": 20, "x": 7.4, "y": 1.0, "z": 1},
+    {"id": "node4_1", "online": true, "rxSens": -139, "txGain": 20, "x": 7.4, "y": 2.6, "z": 1},
+    {"id": "node4_2", "online": true, "rxSens": -139, "txGain": 20, "x": 7.4, "y": 4.2, "z": 1},
+    {"id": "node4_3", "online": true, "rxSens": -139, "txGain": 20, "x": 7.4, "y": 5.800000000000001, "z": 1},
+    {"id": "node4_4", "online": true, "rxSens": -139, "txGain": 20, "x": 7.4, "y": 7.4, "z": 1},
+    {"id": "node4_5", "online": true, "rxSens": -139, "txGain": 20, "x": 7.4, "y": 9.0, "z": 1},
+    {"id": "node5_0", "online": true, "rxSens": -139, "txGain": 20, "x": 9.0, "y": 1.0, "z": 1},
+    {"id": "node5_1", "online": true, "rxSens": -139, "txGain": 20, "x": 9.0, "y": 2.6, "z": 1},
+    {"id": "node5_2", "online": true, "rxSens": -139, "txGain": 20, "x": 9.0, "y": 4.2, "z": 1},
+    {"id": "node5_3", "online": true, "rxSens": -139, "txGain": 20, "x": 9.0, "y": 5.800000000000001, "z": 1},
+    {"id": "node5_4", "online": true, "rxSens": -139, "txGain": 20, "x": 9.0, "y": 7.4, "z": 1},
+    {"id": "node5_5", "online": true, "rxSens": -139, "txGain": 20, "x": 9.0, "y": 9.0, "z": 1}
+  ],
+  "ignoreCollisions": false,
+  "timeScaling": 1,
+  "commands": {
+    "delayMs": 0,
+    "beforeStart": 1000,
+    "perNode": [
+      "fmt('%s/loclad -d --ecla_addr 127.0.0.1:%v --ecla_module LoRa --lora_agent websocket --lora_arg 127.0.0.1%s:%s --strategy_name %s --strategy_config=%s --dtnd=#%s/dtnd# --dtnd_args=#-w %v -r epidemic -n %s --ecla -e incoming -e emergency -d -i 500h#', env('LORA_ECLA'), 3000 + i, bind, nodeId, env('STRATEGY', 'quadrant'), env('STRATEGY_ARGS', ''), env('DTND'), 3000 + i, safe(nodeId))"
+    ],
+    "start": [
+      "./sending.sh"
+    ]
+  },
+  "web": ":8291"
+}

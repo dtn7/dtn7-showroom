@@ -19,6 +19,7 @@ docker run --rm -it                                 \
     -p 50052:50051                                  \
     -p 2023:22                                      \
     -p 1190:1190                                    \
+    -p 8291:8291                                    \
     -v $SHARED:/shared                              \
     --privileged                                    \
     $INTERACTIVE                                    \

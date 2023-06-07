@@ -1,0 +1,222 @@
+{
+  "freq": 868,
+  "gamma": 3,
+  "refDistance": 40,
+  "kmRange": 7,
+  "packetConfig": {
+    "preambleLen": 6,
+    "spreadingFactor": 7,
+    "bandWidth": 125,
+    "codingRate": 8,
+    "crc": true,
+    "explicitHeader": false,
+    "lowDataRateOptimization": false
+  },
+  "nodes": [
+    {
+      "id": "auto1",
+      "online": true,
+      "x": 2.748,
+      "y": 5.887,
+      "z": 1,
+      "txGain": 13,
+      "rxSens": -129,
+      "snr": 0,
+      "icon": "car"
+    },
+    {
+      "id": "auto2",
+      "online": true,
+      "x": 0.84,
+      "y": 4.178,
+      "z": 1,
+      "txGain": 13,
+      "rxSens": -129,
+      "snr": 0,
+      "icon": "car"
+    },
+    {
+      "id": "emergencity",
+      "online": true,
+      "x": 2.071,
+      "y": 3.728,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "herrngarten",
+      "online": true,
+      "x": 3.308,
+      "y": 3.323,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "innercity1",
+      "online": true,
+      "x": 2.395,
+      "y": 3.279,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "innercity2",
+      "online": true,
+      "x": 2.852,
+      "y": 3.124,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "nord1",
+      "online": true,
+      "x": 2.579,
+      "y": 2.299,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "nord2",
+      "online": true,
+      "x": 2.262,
+      "y": 2.181,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "nord3",
+      "online": true,
+      "x": 2.925,
+      "y": 2.424,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "nord4",
+      "online": true,
+      "x": 2.292,
+      "y": 2.439,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "süd1",
+      "online": true,
+      "x": 2.911,
+      "y": 5.217,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "süd2",
+      "online": true,
+      "x": 2.933,
+      "y": 4.605,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "süd3",
+      "online": true,
+      "x": 2.94,
+      "y": 4.893,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -139,
+      "snr": 0,
+      "icon": "tower-broadcast"
+    },
+    {
+      "id": "fußgänger1",
+      "online": true,
+      "x": 3.168,
+      "y": 3.047,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -118,
+      "snr": 0,
+      "icon": "person"
+    },
+    {
+      "id": "fußgänger2",
+      "online": true,
+      "x": 3.368,
+      "y": 3.047,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -118,
+      "snr": 0,
+      "icon": "person"
+    },
+    {
+      "id": "fußgänger3",
+      "online": true,
+      "x": 3.1430,
+      "y": 3.1530,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -118,
+      "snr": 0,
+      "icon": "person"
+    },
+    {
+      "id": "fußgänger4",
+      "online": true,
+      "x": 3.968,
+      "y": 3.047,
+      "z": 1,
+      "txGain": 20,
+      "rxSens": -118,
+      "snr": 0,
+      "icon": "person"
+    }
+  ],
+  "timeScaling": 1,
+  "commands": {
+    "delayMs": 0,
+    "beforeStart": 1000,
+    "perNode": [
+      "fmt('%s/loclad -d --ecla_addr 127.0.0.1:%v --ecla_module LoRa --lora_agent websocket --lora_arg 127.0.0.1%s:%s --strategy_name %s --strategy_config=%s --dtnd=#%s/dtnd# --dtnd_args=#-w %v -r epidemic -n %s --ecla -e incoming -e emergency -d -i 500h#', env('LORA_ECLA'), 3000 + i, bind, nodeId, env('STRATEGY', 'quadrant'), env('STRATEGY_ARGS', ''), env('DTND'), 3000 + i, safe(nodeId))"
+    ],
+    "start": [
+      "./sending.sh"
+    ]
+  },
+  "mobility": {
+    "file": "./scenario.ns2",
+    "tickrate": 1,
+    "loop": true
+  },
+  "backgroundImage": "darmstadt_7x7.png",
+  "web": ":8291"
+}
