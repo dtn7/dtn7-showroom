@@ -105,6 +105,16 @@ ENV DB_PATH="/app/moNNT.py/db.sqlite3" \
     NNTPPORT=1190 \
     NNTPSERVER=10.0.0.21
 
+
+# --------------------------- dtn7zero Installation ---------------------------
+RUN sudo pip3 install --upgrade requests && pip3 install dtn7zero==0.0.6 && sudo apt install python3-matplotlib
+
+# pre-load and parse demo temperature data, will be stored in /app/data/temps.json
+RUN mkdir -p /root/.coregui/scripts
+COPY scripts/prepare_weather_data.py /root/.coregui/scripts
+RUN python3 /root/.coregui/scripts/prepare_weather_data.py
+
+
 # -----------------------------------------------------------------------------
 
 # add new user for tunneling into gateway node in DTN-NNTP scenario

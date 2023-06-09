@@ -32,6 +32,11 @@ nodes:
       - DefaultMulticastRoute
       - dtnd
       - dtnecho
+  - !CustomNode
+    image: /root/.coregui/icons/dtn7zero-router.png
+    name: DTN7ZERO
+    services:
+      - dtn7zero
 observers: []
 preferences: !PreferencesConfig
   editor: vim
