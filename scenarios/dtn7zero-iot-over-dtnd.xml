@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <scenario name="/tmp/tmpgvjzack7">
   <networks>
-    <network id="3" name="wlan3" icon="" canvas="0" type="WIRELESS_LAN">
+    <network id="3" name="AdHocWiFi" icon="" canvas="0" type="WIRELESS_LAN">
       <position x="434.8962707519531" y="237.01507568359375" lat="47.57784503870517" lon="-122.12873001825336" alt="2.0"/>
     </network>
   </networks>
@@ -146,6 +146,8 @@ fig.subplots_adjust(bottom=0.2)
 fig.suptitle(socket.gethostname())
 
 ax.plot([], [])
+plt.xlabel("Time")
+plt.ylabel("Temperature (Degrees Celcius)")
 fig.canvas.draw()
 fig.canvas.flush_events()
 
@@ -163,6 +165,8 @@ def callback_group(payload: bytes, full_source_uri: str, full_destination_uri: s
     ax.plot(timestamps, temperatures)
     ax.xaxis.set_major_formatter(mtick.FuncFormatter(get_label))
     plt.setp(ax.get_xticklabels(), rotation=90, ha='right')
+    plt.xlabel("Time")
+    plt.ylabel("Temperature (Degrees Celcius)")
     fig.canvas.draw()
     fig.canvas.flush_events()
 
@@ -295,6 +299,8 @@ fig.subplots_adjust(bottom=0.2)
 fig.suptitle(socket.gethostname())
 
 ax.plot([], [])
+plt.xlabel("Time")
+plt.ylabel("Temperature (Degrees Celcius)")
 fig.canvas.draw()
 fig.canvas.flush_events()
 
@@ -312,6 +318,8 @@ def callback_group(payload: bytes, full_source_uri: str, full_destination_uri: s
     ax.plot(timestamps, temperatures)
     ax.xaxis.set_major_formatter(mtick.FuncFormatter(get_label))
     plt.setp(ax.get_xticklabels(), rotation=90, ha='right')
+    plt.xlabel("Time")
+    plt.ylabel("Temperature (Degrees Celcius)")
     fig.canvas.draw()
     fig.canvas.flush_events()
 
