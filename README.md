@@ -10,6 +10,7 @@ Currently, the following example scenarios are included:
 - [dtn dwd](https//github.com/stg-tud/dtn-dwd): delay-tolerant weather warnings
 - [dtnchat](https://github.com/gh0st42/dtnchat): a simple text-based dtn chat including a chatbot
 - [NNTP DTN](https://github.com/teschmitt/moNNT.py): a NNTP-to-DTN gateway for group discussions using thunderbard, pan, etc.
+- [dtn7zero](https://github.com/dtn7/dtn7zero): IoT sensor reading and value plotting over DTN, using dtn7zero and dtn7-rs nodes
 
 ## Running 
 
