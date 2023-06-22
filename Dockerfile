@@ -104,7 +104,7 @@ RUN git clone https://github.com/bigjk/loraemu.git $GOPATH/src/github.com/bigjk/
 
 WORKDIR $GOPATH/src/github.com/bigjk/loraemu
 
-FROM ${ARCH}gh0st42/coreemu-lab:1.0.0
+FROM ${ARCH}gh0st42/coreemu-lab:1.1.0
 
 # install stuff for vnc session
 
@@ -170,6 +170,16 @@ COPY scripts/dtnnntp-refresher.py /app
 ENV DB_PATH="/app/moNNT.py/db.sqlite3" \
     NNTPPORT=1190 \
     NNTPSERVER=10.0.0.21
+
+
+# --------------------------- dtn7zero Installation ---------------------------
+RUN sudo pip3 install --upgrade requests && pip3 install dtn7zero==0.0.6 && sudo apt install python3-matplotlib
+
+# pre-load and parse demo temperature data, will be stored in /app/data/temps.json
+RUN mkdir -p /root/.coregui/scripts
+COPY scripts/prepare_weather_data.py /root/.coregui/scripts
+RUN python3 /root/.coregui/scripts/prepare_weather_data.py
+
 
 # -----------------------------------------------------------------------------
 
