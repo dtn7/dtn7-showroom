@@ -10,6 +10,7 @@ Currently, the following example scenarios are included:
 - [dtn dwd](https//github.com/stg-tud/dtn-dwd): delay-tolerant weather warnings
 - [dtnchat](https://github.com/gh0st42/dtnchat): a simple text-based dtn chat including a chatbot
 - [NNTP DTN](https://github.com/teschmitt/moNNT.py): a NNTP-to-DTN gateway for group discussions using thunderbard, pan, etc.
+- [LoRaEMU](https://github.com/BigJk/LoRaEMU) + [LoRa dtn7 ecla](https://github.com/BigJk/dtn7-rs-lora-ecla): a LoRa simulator combined with a lora ecla for dtn7
 - [dtn7zero](https://github.com/dtn7/dtn7zero): IoT sensor reading and value plotting over DTN, using dtn7zero and dtn7-rs nodes
 
 ## Running 
@@ -36,6 +37,24 @@ $ docker run --rm -it --name showroom -p 5901:5901 --privileged -v /tmp/shared:/
 You can then connect with any VNC client to the local *dtn7 showroom* instance with the password `sneakers`.
 
 *NOTE:* In case of weird connection problems within the showroom, please make sure that *ebtables* and *sch_netem* kernel modules are loaded!
+
+## LoRaEMU Demos
+
+- LoRaEMU is accessible inside the container via the ``loraemu`` command
+- Scenario runner and example scenarios are under ``/root/loraemu/scenarios``
+- Scenarios can be run with ``./run.sh <scenario_name> <run_time>``
+- Available scenarios
+    - ``darmstadt``: Real world like scenario akin to Darmstadt
+    - ``connected_grid``: Fully connected grid
+    - ``line_collision``: 5 nodes in row to highlight collision behaviour
+
+### Example: Darmstadt
+
+Open a shell into the terminal. Run the command and open ``http://127.0.0.1:8291/`` in your webbrowser.
+
+```
+cd /root/loraemu/scenarios && ./run.sh darmstadt 20m
+```
 
 ## Manually building the container
 

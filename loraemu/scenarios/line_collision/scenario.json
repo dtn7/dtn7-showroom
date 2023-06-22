@@ -1,0 +1,73 @@
+{
+  "freq": 868,
+  "gamma": 3,
+  "refDistance": 40,
+  "kmRange": 10,
+  "packetConfig": {
+    "preambleLen": 6,
+    "spreadingFactor": 7,
+    "bandWidth": 125,
+    "codingRate": 8,
+    "crc": true,
+    "explicitHeader": false,
+    "lowDataRateOptimization": false
+  },
+  "nodes": [
+    {
+      "id": "node1",
+      "online": true,
+      "x": 1,
+      "y": 5,
+      "z": 1,
+      "txGain": 30,
+      "rxSens": -139
+    },
+    {
+      "id": "node2",
+      "online": true,
+      "x": 1.9,
+      "y": 5,
+      "z": 1,
+      "txGain": 30,
+      "rxSens": -139
+    },
+    {
+      "id": "node3",
+      "online": true,
+      "x": 2.8,
+      "y": 5,
+      "z": 1,
+      "txGain": 30,
+      "rxSens": -139
+    },
+    {
+      "id": "node4",
+      "online": true,
+      "x": 3.7,
+      "y": 5,
+      "z": 1,
+      "txGain": 30,
+      "rxSens": -139
+    },
+    {
+      "id": "node5",
+      "online": true,
+      "x": 4.6,
+      "y": 5,
+      "z": 1,
+      "txGain": 30,
+      "rxSens": -139
+    }
+  ],
+  "commands": {
+    "delayMs": 0,
+    "beforeStart": 1000,
+    "perNode": [
+      "./start.sh"
+    ],
+    "start": [
+      "./sending.sh"
+    ]
+  },
+  "web": ":8291"
+}
