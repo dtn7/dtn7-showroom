@@ -4,7 +4,7 @@ SEND_MSG=${SEND_MSG:-"hello world"}
 MSG_COUNT=${MSG_COUNT:-"1"}
 SEND_WAIT=${SEND_WAIT:-"0"}
 
-ALL_NODES=("auto1" "auto2" "emergencity" "herrngarten" "innercity1" "innercity2" "nord1" "nord2" "nord3" "nord4" "sd1" "sd2" "sd3" "fugnger1" "fugnger2" "fugnger3" "fugnger4")
+ALL_NODES=("car1" "car2" "emergencity" "park" "innercity1" "innercity2" "north1" "north2" "north3" "north4" "south1" "south2" "south3" "person1" "person2" "person3" "person4")
 NUM_NODES=${#ALL_NODES[@]}
 
 echo $NUM_NODES

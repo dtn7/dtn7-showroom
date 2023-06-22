@@ -14,7 +14,7 @@
   },
   "nodes": [
     {
-      "id": "auto1",
+      "id": "car1",
       "online": true,
       "x": 2.748,
       "y": 5.887,
@@ -25,7 +25,7 @@
       "icon": "car"
     },
     {
-      "id": "auto2",
+      "id": "car2",
       "online": true,
       "x": 0.84,
       "y": 4.178,
@@ -47,7 +47,7 @@
       "icon": "tower-broadcast"
     },
     {
-      "id": "herrngarten",
+      "id": "park",
       "online": true,
       "x": 3.308,
       "y": 3.323,
@@ -80,7 +80,7 @@
       "icon": "tower-broadcast"
     },
     {
-      "id": "nord1",
+      "id": "north1",
       "online": true,
       "x": 2.579,
       "y": 2.299,
@@ -91,7 +91,7 @@
       "icon": "tower-broadcast"
     },
     {
-      "id": "nord2",
+      "id": "north2",
       "online": true,
       "x": 2.262,
       "y": 2.181,
@@ -102,7 +102,7 @@
       "icon": "tower-broadcast"
     },
     {
-      "id": "nord3",
+      "id": "north3",
       "online": true,
       "x": 2.925,
       "y": 2.424,
@@ -113,7 +113,7 @@
       "icon": "tower-broadcast"
     },
     {
-      "id": "nord4",
+      "id": "north4",
       "online": true,
       "x": 2.292,
       "y": 2.439,
@@ -124,7 +124,7 @@
       "icon": "tower-broadcast"
     },
     {
-      "id": "süd1",
+      "id": "south1",
       "online": true,
       "x": 2.911,
       "y": 5.217,
@@ -135,7 +135,7 @@
       "icon": "tower-broadcast"
     },
     {
-      "id": "süd2",
+      "id": "south2",
       "online": true,
       "x": 2.933,
       "y": 4.605,
@@ -146,7 +146,7 @@
       "icon": "tower-broadcast"
     },
     {
-      "id": "süd3",
+      "id": "south3",
       "online": true,
       "x": 2.94,
       "y": 4.893,
@@ -157,7 +157,7 @@
       "icon": "tower-broadcast"
     },
     {
-      "id": "fußgänger1",
+      "id": "person1",
       "online": true,
       "x": 3.168,
       "y": 3.047,
@@ -168,7 +168,7 @@
       "icon": "person"
     },
     {
-      "id": "fußgänger2",
+      "id": "person2",
       "online": true,
       "x": 3.368,
       "y": 3.047,
@@ -179,7 +179,7 @@
       "icon": "person"
     },
     {
-      "id": "fußgänger3",
+      "id": "person3",
       "online": true,
       "x": 3.1430,
       "y": 3.1530,
@@ -190,7 +190,7 @@
       "icon": "person"
     },
     {
-      "id": "fußgänger4",
+      "id": "person4",
       "online": true,
       "x": 3.968,
       "y": 3.047,
