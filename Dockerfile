@@ -97,6 +97,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
 
 RUN git clone https://github.com/bigjk/loraemu.git $GOPATH/src/github.com/bigjk/loraemu && \
     cd $GOPATH/src/github.com/bigjk/loraemu && \
+    git checkout 182c303c4b03355f1300e8bbb05c3c9caf10ce6f && \
     ./build_all.sh && \
     mv ./release/emu ./release/loraemu && \
     mv ./release/log-inspect ./release/loraemu-log-inspect && \
