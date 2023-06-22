@@ -11,6 +11,7 @@ Currently, the following example scenarios are included:
 - [dtnchat](https://github.com/gh0st42/dtnchat): a simple text-based dtn chat including a chatbot
 - [NNTP DTN](https://github.com/teschmitt/moNNT.py): a NNTP-to-DTN gateway for group discussions using thunderbard, pan, etc.
 - [LoRaEMU](https://github.com/BigJk/LoRaEMU) + [LoRa dtn7 ecla](https://github.com/BigJk/dtn7-rs-lora-ecla): a LoRa simulator combined with a lora ecla for dtn7
+- [dtn7zero](https://github.com/dtn7/dtn7zero): IoT sensor reading and value plotting over DTN, using dtn7zero and dtn7-rs nodes
 
 ## Running 
 
@@ -37,7 +38,7 @@ You can then connect with any VNC client to the local *dtn7 showroom* instance w
 
 *NOTE:* In case of weird connection problems within the showroom, please make sure that *ebtables* and *sch_netem* kernel modules are loaded!
 
-## LoRaEMU
+## LoRaEMU Demos
 
 - LoRaEMU is accessible inside the container via the ``loraemu`` command
 - Scenario runner and example scenarios are under ``/root/loraemu/scenarios``
