@@ -1,6 +1,6 @@
 ARG ARCH=
 
-FROM ${ARCH}rust:1.64 as builder
+FROM ${ARCH}rust:1.71.1 as builder
 WORKDIR /root
 RUN rustup component add rustfmt
 RUN git clone https://github.com/dtn7/dtn7-rs  && cd dtn7-rs && \
@@ -8,14 +8,17 @@ RUN git clone https://github.com/dtn7/dtn7-rs  && cd dtn7-rs && \
     cargo install --locked --bins --examples --root /usr/local --path examples && \
     cargo install --locked --bins --examples --root /usr/local --path core/dtn7
 RUN cargo install --locked --bins --examples --root /usr/local dtn7-plus --git https://github.com/dtn7/dtn7-plus-rs  --rev 010202e56 dtn7-plus
+
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y libpango1.0-dev libatk1.0-dev libsoup2.4-dev libwebkit2gtk-4.0-dev cmake && \
     rm -rf /var/lib/apt/lists/*
 RUN cargo install --bins --examples --root /usr/local --git https://github.com/gh0st42/coreemu-rs --rev 326a6f7
+
 RUN git clone https://github.com/stg-tud/dtn-dwd && cd dtn-dwd && \
     git checkout b78e241 && \
     cargo install --root /usr/local --path backend/ && \
     cargo install --root /usr/local --path client/
+
 RUN git clone https://github.com/gh0st42/dtnchat && cd dtnchat && \
     git checkout 93f1450 && \
     cargo install --bins --examples --root /usr/local --path .
@@ -107,7 +110,7 @@ ENV DB_PATH="/app/moNNT.py/db.sqlite3" \
 
 
 # --------------------------- dtn7zero Installation ---------------------------
-RUN sudo pip3 install --upgrade requests && pip3 install dtn7zero==0.0.6 && sudo apt install python3-matplotlib
+RUN sudo pip3 install --upgrade requests && pip3 install dtn7zero==0.0.8 && sudo apt install python3-matplotlib
 
 # pre-load and parse demo temperature data, will be stored in /app/data/temps.json
 RUN mkdir -p /root/.coregui/scripts
