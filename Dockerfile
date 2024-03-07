@@ -49,14 +49,16 @@ FROM ${ARCH}gh0st42/coreemu-lab:1.1.0
 # install stuff for vnc session
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && \
-    apt-get install -y lxde-core lxterminal \
-    tightvncserver firefox wmctrl xterm \
+RUN apt clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    apt-get update && \
+    apt-get install -y --fix-missing lxde-core lxterminal \
+    tightvncserver firefox wmctrl xterm websockify \
     gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl \
     pan tin slrn thunderbird \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash && \
+RUN curl -sL https://deb.nodesource.com/setup_21.x | bash && \
     apt-get install -y nodejs && \
     npm i -g node-red && \
     npm i -g node-red-dashboard && \
@@ -131,6 +133,8 @@ COPY configs/xstartup /root/.vnc/
 COPY scripts/coreemu.sh /root/Desktop
 COPY scripts/entrypoint.sh /entrypoint.sh
 
+WORKDIR /root
+RUN git clone https://github.com/noVNC/noVNC.git 
 RUN echo "export USER=root" >> /root/.bashrc
 ENV USER root
 RUN printf "sneakers\nsneakers\nn\n" | vncpasswd
@@ -139,5 +143,6 @@ EXPOSE 22
 EXPOSE 1190
 EXPOSE 5901
 EXPOSE 50051
+EXPOSE 6080
 ENTRYPOINT [ "/entrypoint.sh" ]
 WORKDIR /root

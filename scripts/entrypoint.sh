@@ -28,5 +28,8 @@ fi
 
 /usr/local/bin/fakegps.sh > /tmp/fakegps.log 2>&1 &
 
+/root/noVNC/utils/novnc_proxy --vnc localhost:5901 2>&1 > /tmp/novnc.log &
+
 echo "vnc://127.0.0.1:5901"
+echo "http://127.0.0.1:6080/vnc.html"
 tail -f /dev/null
