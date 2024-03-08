@@ -1,10 +1,10 @@
 ARG ARCH=
 
-FROM ${ARCH}rust:1.71.1 as builder
+FROM ${ARCH}rust:1.76.0-bullseye as builder
 WORKDIR /root
 RUN rustup component add rustfmt
 RUN git clone https://github.com/dtn7/dtn7-rs  && cd dtn7-rs && \
-    git checkout 43fac1cc2ead3a8fa9e1825f8265a77dd9298daa && \
+    git checkout 02cb223 && \
     cargo install --locked --bins --examples --root /usr/local --path examples && \
     cargo install --locked --bins --examples --root /usr/local --path core/dtn7
 RUN cargo install --locked --bins --examples --root /usr/local dtn7-plus --git https://github.com/dtn7/dtn7-plus-rs  --rev 010202e56 dtn7-plus
